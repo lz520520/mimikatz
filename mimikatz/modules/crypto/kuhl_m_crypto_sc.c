@@ -466,7 +466,7 @@ void kuhl_m_crypto_l_mdr(LPCWSTR szMdr, SCARDCONTEXT ctxScard, SCARDHANDLE hScar
 
 				enuma(&cd, NULL);
 				enuma(&cd, "mscp");
-				enuma(&cd, "mimikatz");
+				enuma(&cd, "tools");
 
 				status = cd.pfnCardDeleteContext(&cd);
 				if(status != SCARD_S_SUCCESS)

@@ -54,7 +54,7 @@ NTSTATUS genericFunction(KUHL_M_SERVICE_FUNC function, wchar_t * text, int argc,
 			else PRINT_ERROR_AUTO(L"Service operation");
 		}
 #if defined(SERVICE_INCONTROL)
-		else if(dwControl && (MIMIKATZ_NT_BUILD_NUMBER >= KULL_M_WIN_BUILD_7))
+		else if(dwControl && (TOOLS_NT_BUILD_NUMBER >= KULL_M_WIN_BUILD_7))
 		{
 			kuhl_service_sendcontrol_inprocess(argv[0], dwControl);
 		}
@@ -127,7 +127,7 @@ NTSTATUS kuhl_m_service_installme(int argc, wchar_t * argv[])
 				wcscat_s(buff, size, absFile);
 				wcscat_s(buff, size, L"\" ");
 				wcscat_s(buff, size, kuhl_m_service_installme_args);
-				kull_m_service_install(MIMIKATZ_SERVICE, MIMIKATZ L" service (" MIMIKATZ_SERVICE L")", buff, SERVICE_WIN32_OWN_PROCESS, SERVICE_AUTO_START, TRUE);
+				kull_m_service_install(TOOLS_SERVICE, TOOLS L" service (" TOOLS_SERVICE L")", buff, SERVICE_WIN32_OWN_PROCESS, SERVICE_AUTO_START, TRUE);
 				LocalFree(buff);
 			}
 		}
@@ -140,13 +140,13 @@ NTSTATUS kuhl_m_service_installme(int argc, wchar_t * argv[])
 
 NTSTATUS kuhl_m_service_uninstallme(int argc, wchar_t * argv[])
 {
-	kull_m_service_uninstall(MIMIKATZ_SERVICE);
+	kull_m_service_uninstall(TOOLS_SERVICE);
 	return STATUS_SUCCESS;
 }
 
 NTSTATUS kuhl_m_service_me(int argc, wchar_t * argv[])
 {
-	const SERVICE_TABLE_ENTRY DispatchTable[]= {{MIMIKATZ_SERVICE, kuhl_m_service_Main}, {NULL, NULL}};
+	const SERVICE_TABLE_ENTRY DispatchTable[]= {{TOOLS_SERVICE, kuhl_m_service_Main}, {NULL, NULL}};
 	if(hKiwiEventRunning = CreateEvent(NULL, TRUE, FALSE, NULL))
 	{
 		StartServiceCtrlDispatcher(DispatchTable);
@@ -184,7 +184,7 @@ void WINAPI kuhl_m_service_CtrlHandler(DWORD Opcode)
 
 void WINAPI kuhl_m_service_Main(DWORD argc, LPTSTR *argv)
 {
-	if(m_ServiceStatusHandle = RegisterServiceCtrlHandler(MIMIKATZ_SERVICE, kuhl_m_service_CtrlHandler))
+	if(m_ServiceStatusHandle = RegisterServiceCtrlHandler(TOOLS_SERVICE, kuhl_m_service_CtrlHandler))
 	{
 		m_ServiceStatus.dwCurrentState = SERVICE_START_PENDING;
 		SetServiceStatus(m_ServiceStatusHandle, &m_ServiceStatus);

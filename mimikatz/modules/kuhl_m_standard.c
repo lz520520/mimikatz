@@ -7,12 +7,12 @@
 
 const KUHL_M_C kuhl_m_c_standard[] = {
 	//{kuhl_m_standard_test,		L"test",	L"Test routine (you don\'t want to see this !)"},
-	{kuhl_m_standard_exit,		L"exit",		L"Quit mimikatz"},
+	{kuhl_m_standard_exit,		L"exit",		L"Quit tools"},
 	{kuhl_m_standard_cls,		L"cls",			L"Clear screen (doesn\'t work with redirections, like PsExec)"},
 	{kuhl_m_standard_answer,	L"answer",		L"Answer to the Ultimate Question of Life, the Universe, and Everything"},
 	{kuhl_m_standard_coffee,	L"coffee",		L"Please, make me a coffee!"},
 	{kuhl_m_standard_sleep,		L"sleep",		L"Sleep an amount of milliseconds"},
-	{kuhl_m_standard_log,		L"log",			L"Log mimikatz input/output to file"},
+	{kuhl_m_standard_log,		L"log",			L"Log tools input/output to file"},
 	{kuhl_m_standard_base64,	L"base64",		L"Switch file input/output base64"},
 	{kuhl_m_standard_version,	L"version",		L"Display some version informations"},
 	{kuhl_m_standard_cd,		L"cd",			L"Change or display current directory"},
@@ -71,7 +71,7 @@ NTSTATUS kuhl_m_standard_sleep(int argc, wchar_t * argv[])
 
 NTSTATUS kuhl_m_standard_log(int argc, wchar_t * argv[])
 {
-	PCWCHAR filename = (kull_m_string_args_byName(argc, argv, L"stop", NULL, NULL) ? NULL : (argc ? argv[0] : MIMIKATZ_DEFAULT_LOG));
+	PCWCHAR filename = (kull_m_string_args_byName(argc, argv, L"stop", NULL, NULL) ? NULL : (argc ? argv[0] : TOOLS_DEFAULT_LOG));
 	kprintf(L"Using \'%s\' for logfile : %s\n", filename, kull_m_output_file(filename) ? L"OK" : L"KO");
 	return STATUS_SUCCESS;
 }
@@ -116,14 +116,14 @@ NTSTATUS kuhl_m_standard_version(int argc, wchar_t * argv[])
 	#endif
 	{
 		kprintf(
-			L"\n" MIMIKATZ L" " MIMIKATZ_VERSION L" (arch " MIMIKATZ_ARCH L")\n"
+			L"\n" TOOLS L" " TOOLS_VERSION L" (arch " TOOLS_ARCH L")\n"
 			L"Windows NT %u.%u build %u (arch x%s)\n"
 			L"msvc %u %u\n",
-			MIMIKATZ_NT_MAJOR_VERSION, MIMIKATZ_NT_MINOR_VERSION, MIMIKATZ_NT_BUILD_NUMBER, isWow64 ? L"64" : L"86", _MSC_FULL_VER, _MSC_BUILD
+			TOOLS_NT_MAJOR_VERSION, TOOLS_NT_MINOR_VERSION, TOOLS_NT_BUILD_NUMBER, isWow64 ? L"64" : L"86", _MSC_FULL_VER, _MSC_BUILD
 			);
 	}
 	#if defined(_M_X64) || defined(_M_ARM64) // TODO:ARM64
-	if((MIMIKATZ_NT_BUILD_NUMBER >= KULL_M_WIN_MIN_BUILD_10) && (hModule = GetModuleHandle(L"ntdll")))
+	if((TOOLS_NT_BUILD_NUMBER >= KULL_M_WIN_MIN_BUILD_10) && (hModule = GetModuleHandle(L"ntdll")))
 	{
 		if(pNtQuerySystemInformationEx = (PNTQUERYSYSTEMINFORMATIONEX) GetProcAddress(hModule, "NtQuerySystemInformationEx"))
 		{
@@ -171,7 +171,7 @@ NTSTATUS kuhl_m_standard_version(int argc, wchar_t * argv[])
 			{
 				if(GetSystemDirectory(system, dwSystem) == (dwSystem - 1))
 				{
-					if(kull_m_string_sprintf(&cabname, MIMIKATZ L"_" MIMIKATZ_ARCH L"_sysfiles_%u", MIMIKATZ_NT_BUILD_NUMBER))
+					if(kull_m_string_sprintf(&cabname, TOOLS L"_" TOOLS_ARCH L"_sysfiles_%u", TOOLS_NT_BUILD_NUMBER))
 					{
 						if(acabname = kull_m_string_unicode_to_ansi(cabname))
 						{

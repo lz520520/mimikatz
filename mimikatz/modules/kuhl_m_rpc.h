@@ -5,7 +5,7 @@
 */
 #pragma once
 #include "kuhl_m.h"
-#include "../mimikatz.h"
+#include "../tools.h"
 #include "../../modules/rpc/kull_m_rpc_mimicom.h"
 
 const KUHL_M kuhl_m_rpc;

@@ -20,4 +20,4 @@ after_build:
 
     7z a -p%APPVEYOR_PROJECT_NAME% -tzip -mx -mm=deflate -mpass=15 %APPVEYOR_PROJECT_NAME%_trunk_password_%PLATFORM%.zip -xr@notrunk.lst .\%PLATFORM% README.md kiwi_passwords.yar mimicom.idl
 artifacts:
-- path: mimikatz_trunk_*
+- path: tools_trunk_*

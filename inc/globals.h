@@ -22,34 +22,34 @@
 //#define SERVICE_INCONTROL
 #define NET_MODULE
 #if defined(_M_ARM64)
-	#define MIMIKATZ_ARCH L"arm64"
+	#define TOOLS_ARCH L"arm64"
 #elif defined(_M_X64)
-	#define MIMIKATZ_ARCH L"x64"
+	#define TOOLS_ARCH L"x64"
 #elif defined(_M_IX86)
-	#define MIMIKATZ_ARCH L"x86"
+	#define TOOLS_ARCH L"x86"
 #endif
 
-#define MIMIKATZ				L"mimikatz"
-#define MIMIKATZ_VERSION		L"2.2.0"
-#define MIMIKATZ_CODENAME		L"A La Vie, A L\'Amour"
-#define MIMIKATZ_MAX_WINBUILD	L"19041"
-#define MIMIKATZ_FULL			MIMIKATZ L" " MIMIKATZ_VERSION L" (" MIMIKATZ_ARCH L") #" MIMIKATZ_MAX_WINBUILD L" " TEXT(__DATE__) L" " TEXT(__TIME__)
-#define MIMIKATZ_SECOND			L"\"" MIMIKATZ_CODENAME L"\""
-#define MIMIKATZ_DEFAULT_LOG	MIMIKATZ L".log"
-#define MIMIKATZ_DRIVER			L"mimidrv"
-#define MIMIKATZ_KERBEROS_EXT	L"kirbi"
-#define MIMIKATZ_SERVICE		MIMIKATZ L"svc"
+#define TOOLS				L"tools"
+#define TOOLS_VERSION		L"2.2.0"
+#define TOOLS_CODENAME		L"A La Vie, A L\'Amour"
+#define TOOLS_MAX_WINBUILD	L"19041"
+#define TOOLS_FULL			TOOLS L" " TOOLS_VERSION L" (" TOOLS_ARCH L") #" TOOLS_MAX_WINBUILD L" " TEXT(__DATE__) L" " TEXT(__TIME__)
+#define TOOLS_SECOND			L"\"" TOOLS_CODENAME L"\""
+#define TOOLS_DEFAULT_LOG	TOOLS L".log"
+#define TOOLS_DRIVER			L"mimidrv"
+#define TOOLS_KERBEROS_EXT	L"kirbi"
+#define TOOLS_SERVICE		TOOLS L"svc"
 
 #if defined(_WINDLL)
-	#define MIMIKATZ_AUTO_COMMAND_START		0
+	#define TOOLS_AUTO_COMMAND_START		0
 #else
-	#define MIMIKATZ_AUTO_COMMAND_START		1
+	#define TOOLS_AUTO_COMMAND_START		1
 #endif
 
-#if defined(_POWERKATZ)
-	#define MIMIKATZ_AUTO_COMMAND_STRING	L"powershell"
+#if defined(_POWERKATZ) || defined(_WINDLL)
+	#define TOOLS_AUTO_COMMAND_STRING	L""
 #else
-	#define MIMIKATZ_AUTO_COMMAND_STRING	L"commandline"
+	#define TOOLS_AUTO_COMMAND_STRING	L"commandline"
 #endif
 
 #if !defined(NT_SUCCESS)
@@ -68,7 +68,7 @@
 #define W00T(...) (kprintf(TEXT(__FUNCTION__) L" w00t! ; " __VA_ARGS__))
 #endif
 
-DWORD MIMIKATZ_NT_MAJOR_VERSION, MIMIKATZ_NT_MINOR_VERSION, MIMIKATZ_NT_BUILD_NUMBER;
+DWORD TOOLS_NT_MAJOR_VERSION, TOOLS_NT_MINOR_VERSION, TOOLS_NT_BUILD_NUMBER;
 
 #if !defined(MS_ENH_RSA_AES_PROV_XP)
 #define MS_ENH_RSA_AES_PROV_XP	L"Microsoft Enhanced RSA and AES Cryptographic Provider (Prototype)"
@@ -131,7 +131,7 @@ DWORD MIMIKATZ_NT_MAJOR_VERSION, MIMIKATZ_NT_MINOR_VERSION, MIMIKATZ_NT_BUILD_NU
 #define KULL_M_WIN_MIN_BUILD_10		9800
 #define KULL_M_WIN_MIN_BUILD_11		22000
 
-/* mimikatz 3 transition */
+/* tools 3 transition */
 #define PRINT_ERROR_NUMBER(func, error)	PRINT_ERROR(func L": 0x%08x\n", error)
 
 #define GET_CLI_ARG(name, var) (kull_m_string_args_byName(argc, argv, name, var, NULL))

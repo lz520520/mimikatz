@@ -4,6 +4,9 @@
 	Licence : https://creativecommons.org/licenses/by/4.0/
 */
 #pragma once
+
+#ifdef _WIN64
+
 #include "../kuhl_m_misc.h"
 #include "../../../modules/kull_m_crypto.h"
 #include "../../../modules/rpc/kull_m_rpc_ms-odj.h"
@@ -27,3 +30,5 @@ void kuhl_m_misc_djoin_OP_CERT_SST_STORE_descr(DWORD level, POP_CERT_SST_STORE p
 void kuhl_m_misc_djoin_OP_POLICY_PART_descr(DWORD level, ULONG cbBlob, PBYTE pBlob);
 void kuhl_m_misc_djoin_OP_POLICY_ELEMENT_LIST_descr(DWORD level, POP_POLICY_ELEMENT_LIST pElementList);
 void kuhl_m_misc_djoin_OP_POLICY_ELEMENT_descr(DWORD level, POP_POLICY_ELEMENT pElement);
+
+#endif

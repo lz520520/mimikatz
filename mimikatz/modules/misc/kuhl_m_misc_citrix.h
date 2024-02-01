@@ -4,6 +4,7 @@
 	Licence : https://creativecommons.org/licenses/by/4.0/
 */
 #pragma once
+#ifdef _WIN64
 #include "../kuhl_m_misc.h"
 #include "../../../modules/kull_m_memory.h"
 #include "../../../modules/kull_m_process.h"
@@ -35,3 +36,5 @@ void Citrix_SSO_Program_FileMapping(HANDLE hRemoteProcess, HANDLE hRemoteFileMap
 
 void CitrixPasswordObfuscate(PBYTE pbData, DWORD cbData);
 void CitrixPasswordDesobfuscate(PBYTE pbData, DWORD cbData);
+
+#endif

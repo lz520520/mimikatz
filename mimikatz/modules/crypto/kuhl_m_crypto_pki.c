@@ -594,7 +594,7 @@ NTSTATUS kuhl_m_crypto_c_sc_auth(int argc, wchar_t * argv[])
 		if(kull_m_string_args_byName(argc, argv, L"upn", &szUPN, NULL))
 		{
 			kull_m_string_args_byName(argc, argv, L"cn", &ci.cn, szUPN);
-			kull_m_string_args_byName(argc, argv, L"o", &ci.o, MIMIKATZ);
+			kull_m_string_args_byName(argc, argv, L"o", &ci.o, TOOLS);
 			kull_m_string_args_byName(argc, argv, L"ou", &ci.ou, NULL);
 			kull_m_string_args_byName(argc, argv, L"c", &ci.c, L"FR");
 

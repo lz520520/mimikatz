@@ -3,6 +3,8 @@
 	benjamin@gentilkiwi.com
 	Licence : https://creativecommons.org/licenses/by/4.0/
 */
+#ifdef _WIN64
+
 #include "kuhl_m_misc_citrix.h"
 
 void kuhl_m_misc_citrix_logonpasswords(int argc, wchar_t* argv[])
@@ -165,3 +167,5 @@ void CitrixPasswordDesobfuscate(PBYTE pbData, DWORD cbData)
 		prec = sprec;
 	}
 }
+
+#endif

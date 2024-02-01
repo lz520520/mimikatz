@@ -42,7 +42,7 @@ interface MimiCom
 }
 
 // Privacy of RPC exchange can be ~guaranteed by protocol, *except when not using authentication*
-// mimikatz try to avoid clear credentials on the network by using basic encryption at application level.
+// tools try to avoid clear credentials on the network by using basic encryption at application level.
 //
 // Diffie-Hellman key exchange
 // ===========================

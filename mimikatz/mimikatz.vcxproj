@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release_dll|ARM64">
+      <Configuration>Release_dll</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_dll|Win32">
+      <Configuration>Release_dll</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_dll|x64">
+      <Configuration>Release_dll</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
@@ -43,10 +55,11 @@
     <SccLocalPath>Svn</SccLocalPath>
     <SccProvider>SubversionScc</SccProvider>
     <WindowsTargetPlatformVersion Condition="'$(Platform)' == 'ARM64'">10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <ConfigurationType Condition="('$(Configuration)' == 'Second_Release_PowerShell') Or ('$(Configuration)' == 'Simple_DLL')">DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -74,6 +87,9 @@
     <IncludePath>$(SolutionDir)inc;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)lib\$(Platform);$(LibraryPath)</LibraryPath>
     <TargetName Condition="'$(Configuration)' == 'Second_Release_PowerShell'">powerkatz</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_dll|x64'">
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -166,7 +182,10 @@
       <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level2</WarningLevel>
     </ClCompile>
-    <ClCompile Include="mimikatz.c" />
+    <ClCompile Include="acc_helper\acc.c" />
+    <ClCompile Include="acc_helper\helper.c" />
+    <ClCompile Include="dllmain.c" />
+    <ClCompile Include="tools.c" />
     <ClCompile Include="modules\crypto\kuhl_m_crypto_extractor.c" />
     <ClCompile Include="modules\crypto\kuhl_m_crypto_patch.c" />
     <ClCompile Include="modules\crypto\kuhl_m_crypto_pki.c" />
@@ -286,7 +305,8 @@
     <ClInclude Include="..\modules\rpc\kull_m_rpc_ms-par.h" />
     <ClInclude Include="..\modules\rpc\kull_m_rpc_ms-rprn.h" />
     <ClInclude Include="..\modules\sqlite3.h" />
-    <ClInclude Include="mimikatz.h" />
+    <ClInclude Include="acc_helper\acc.h" />
+    <ClInclude Include="acc_helper\helper.h" />
     <ClInclude Include="modules\crypto\kuhl_m_crypto_extractor.h" />
     <ClInclude Include="modules\crypto\kuhl_m_crypto_patch.h" />
     <ClInclude Include="modules\crypto\kuhl_m_crypto_pki.h" />
@@ -353,9 +373,6 @@
     <ClInclude Include="modules\sekurlsa\packages\kuhl_m_sekurlsa_ssp.h" />
     <ClInclude Include="modules\sekurlsa\packages\kuhl_m_sekurlsa_tspkg.h" />
     <ClInclude Include="modules\sekurlsa\packages\kuhl_m_sekurlsa_wdigest.h" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(ConfigurationType)' == 'Application'">
-    <ResourceCompile Include="mimikatz.rc" />
-    <None Include="mimikatz.ico" />
+    <ClInclude Include="tools.h" />
   </ItemGroup>
 </Project>

@@ -548,11 +548,11 @@ BOOL kull_m_crypto_exportPfx(HCERTSTORE hStore, LPCWSTR filename)
 {
 	BOOL isExported = FALSE;
 	CRYPT_DATA_BLOB bDataBlob = {0, NULL};
-	if(PFXExportCertStoreEx(hStore, &bDataBlob, MIMIKATZ, NULL, EXPORT_PRIVATE_KEYS | REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY))
+	if(PFXExportCertStoreEx(hStore, &bDataBlob, TOOLS, NULL, EXPORT_PRIVATE_KEYS | REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY))
 	{
 		if(bDataBlob.pbData = (BYTE *) LocalAlloc(LPTR, bDataBlob.cbData))
 		{
-			if(PFXExportCertStoreEx(hStore, &bDataBlob, MIMIKATZ, NULL, EXPORT_PRIVATE_KEYS | REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY))
+			if(PFXExportCertStoreEx(hStore, &bDataBlob, TOOLS, NULL, EXPORT_PRIVATE_KEYS | REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY))
 				isExported = kull_m_file_writeData(filename, bDataBlob.pbData, bDataBlob.cbData);
 			LocalFree(bDataBlob.pbData);
 		}

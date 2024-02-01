@@ -295,7 +295,7 @@ void kuhl_m_iis_apphost_provider_decrypt(int argc, wchar_t * argv[], PCWSTR keyC
 			szLiveData = szData;
 			if(isLive)
 				kprintf(L"  | Live Key  : %s - %s : ", keyContainerName, isMachine ? L"machine" : L"user");
-			if(CryptAcquireContext(&hProv, isLive ? keyContainerName : NULL, (MIMIKATZ_NT_BUILD_NUMBER <= KULL_M_WIN_BUILD_XP) ? MS_ENH_RSA_AES_PROV_XP : MS_ENH_RSA_AES_PROV , PROV_RSA_AES, (isLive ? 0 : CRYPT_VERIFYCONTEXT) | (isMachine ? CRYPT_MACHINE_KEYSET : 0)))
+			if(CryptAcquireContext(&hProv, isLive ? keyContainerName : NULL, (TOOLS_NT_BUILD_NUMBER <= KULL_M_WIN_BUILD_XP) ? MS_ENH_RSA_AES_PROV_XP : MS_ENH_RSA_AES_PROV , PROV_RSA_AES, (isLive ? 0 : CRYPT_VERIFYCONTEXT) | (isMachine ? CRYPT_MACHINE_KEYSET : 0)))
 			{
 				if(isLive)
 					kprintf(L"OK\n");

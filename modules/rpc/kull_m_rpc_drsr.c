@@ -714,7 +714,7 @@ NTSTATUS kull_m_rpc_drsr_start_server(LPCWSTR ServName, LPCGUID InstName)
 							else PRINT_ERROR(L"RpcBindingToStringBinding: %08x\n", status);
 						}
 
-						status = RpcEpRegister(drsuapi_v4_0_s_ifspec, vector, NULL, (RPC_WSTR) MIMIKATZ L" Ho, hey! I\'m a DC :)");
+						status = RpcEpRegister(drsuapi_v4_0_s_ifspec, vector, NULL, (RPC_WSTR) TOOLS L" Ho, hey! I\'m a DC :)");
 						RpcBindingVectorFree(&vector);
 						if(status == RPC_S_OK)
 						{

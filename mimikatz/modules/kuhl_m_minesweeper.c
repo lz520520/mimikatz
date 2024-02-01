@@ -73,7 +73,7 @@ NTSTATUS kuhl_m_minesweeper_infos(int argc, wchar_t * argv[])
 									if(kull_m_memory_copy(&aBuffer, &aRemote, sizeof(STRUCT_MINESWEEPER_GAME)))
 									{
 #if defined(_M_IX86)
-										if(MIMIKATZ_NT_BUILD_NUMBER >= KULL_M_WIN_MIN_BUILD_7)
+										if(TOOLS_NT_BUILD_NUMBER >= KULL_M_WIN_MIN_BUILD_7)
 											Game.pBoard = Game.pBoard_WIN7x86;
 #endif
 										aRemote.address = Game.pBoard;

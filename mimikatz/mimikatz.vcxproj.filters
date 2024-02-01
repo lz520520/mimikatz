@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="mimikatz.c" />
+    <ClCompile Include="tools.c" />
     <ClCompile Include="modules\kuhl_m_standard.c">
       <Filter>local modules</Filter>
     </ClCompile>
@@ -341,9 +341,15 @@
     <ClCompile Include="modules\misc\kuhl_m_misc_citrix.c">
       <Filter>local modules\misc</Filter>
     </ClCompile>
+    <ClCompile Include="dllmain.c" />
+    <ClCompile Include="acc_helper\acc.c">
+      <Filter>acc_helper</Filter>
+    </ClCompile>
+    <ClCompile Include="acc_helper\helper.c">
+      <Filter>acc_helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mimikatz.h" />
     <ClInclude Include="modules\kuhl_m.h">
       <Filter>local modules</Filter>
     </ClInclude>
@@ -701,6 +707,13 @@
     <ClInclude Include="modules\misc\kuhl_m_misc_citrix.h">
       <Filter>local modules\misc</Filter>
     </ClInclude>
+    <ClInclude Include="tools.h" />
+    <ClInclude Include="acc_helper\acc.h">
+      <Filter>acc_helper</Filter>
+    </ClInclude>
+    <ClInclude Include="acc_helper\helper.h">
+      <Filter>acc_helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="local modules">
@@ -744,11 +757,8 @@
     <Filter Include="local modules\misc">
       <UniqueIdentifier>{ca3b8b78-3db9-40c8-8091-438a90e5be4e}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="mimikatz.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="mimikatz.ico" />
+    <Filter Include="acc_helper">
+      <UniqueIdentifier>{05fd5f22-7c1f-4330-b003-04e5d2e74c3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

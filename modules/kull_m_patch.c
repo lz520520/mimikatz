@@ -86,7 +86,7 @@ BOOL kull_m_patch_genericProcessOrServiceFromBuild(PKULL_M_PATCH_GENERIC generic
 
 	PKULL_M_PATCH_GENERIC currenReferences;
 
-	if(currenReferences = kull_m_patch_getGenericFromBuild(generics, cbGenerics, MIMIKATZ_NT_BUILD_NUMBER))
+	if(currenReferences = kull_m_patch_getGenericFromBuild(generics, cbGenerics, TOOLS_NT_BUILD_NUMBER))
 	{
 		aPatternMemory.address = currenReferences->Search.Pattern;
 		aPatchMemory.address = currenReferences->Patch.Pattern;

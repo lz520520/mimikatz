@@ -12,13 +12,13 @@ int wmain(int argc, wchar_t *argv[])
 	PKULL_M_MEMORY_HANDLE hMemory;
 	OSVERSIONINFO osInfo;
 
-	kprintf(L"\n"
-		L"  .#####.   " MIMILOVE_FULL L"\n"
-		L" .## ^ ##.  " MIMILOVE_SECOND L"\n"
-		L" ## / \\ ##  /* * *\n"
-		L" ## \\ / ##   Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )\n"
-		L" '## v ##'   https://blog.gentilkiwi.com/mimikatz             (oe.eo)\n"
-		L"  '#####'    " MIMILOVE_SPECIAL L"* * */\n\n");
+	// kprintf(L"\n"
+	// 	L"  .#####.   " MIMILOVE_FULL L"\n"
+	// 	L" .## ^ ##.  " MIMILOVE_SECOND L"\n"
+	// 	L" ## / \\ ##  /* * *\n"
+	// 	L" ## \\ / ##   Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )\n"
+	// 	L" '## v ##'   https://blog.gentilkiwi.com/tools             (oe.eo)\n"
+	// 	L"  '#####'    " MIMILOVE_SPECIAL L"* * */\n\n");
 
 	RtlZeroMemory(&osInfo, sizeof(OSVERSIONINFO));
 	osInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);

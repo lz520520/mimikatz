@@ -3,6 +3,8 @@
 	benjamin@gentilkiwi.com
 	Licence : https://creativecommons.org/licenses/by/4.0/
 */
+#ifdef _WIN64
+
 #include "kuhl_m_misc_djoin.h"
 
 void kuhl_m_misc_djoin(int argc, wchar_t* argv[])
@@ -361,3 +363,5 @@ void kuhl_m_misc_djoin_OP_POLICY_ELEMENT_descr(DWORD level, POP_POLICY_ELEMENT p
 		//kprinthex16(pElement->pValueData, pElement->cbValueData);
 	}
 }
+
+#endif

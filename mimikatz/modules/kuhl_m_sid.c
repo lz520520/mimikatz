@@ -229,7 +229,7 @@ KULL_M_PATCH_GENERIC SysModReservedAttReferences[] = {
 NTSTATUS kuhl_m_sid_patch(int argc, wchar_t * argv[])
 {
 	PCWSTR service, lib;
-	if(MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_VISTA)
+	if(TOOLS_NT_BUILD_NUMBER < KULL_M_WIN_MIN_BUILD_VISTA)
 	{
 		service = L"samss";
 		lib = L"ntdsa.dll";

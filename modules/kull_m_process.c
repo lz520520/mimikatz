@@ -372,7 +372,7 @@ BOOL kull_m_process_peb(PKULL_M_MEMORY_HANDLE memory, PPEB pPeb, BOOL isWOW)
 
 	switch(memory->type)
 	{
-#if !defined(MIMIKATZ_W2000_SUPPORT)
+#if !defined(TOOLS_W2000_SUPPORT)
 	case KULL_M_MEMORY_TYPE_OWN:
 		if(!isWOW)
 		{

